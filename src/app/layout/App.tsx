@@ -1,21 +1,21 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useEffect, Fragment, FC } from "react";
+import { connect } from "react-redux";
 import { Container } from "semantic-ui-react";
-import axios from "axios";
-import { IActivity } from "../modles/activity";
+
+import { IDataState } from "../modles/activity";
 import { NavBar } from "../features/components/NavBar";
 import { ActivityDashboard } from "../features/components/activities/dashbord/ActivityDashboard";
+import {fetchActiviteis} from "../actions/DataActions";
 
-const App = () => {
-  const [activities, setActivites] = useState<IActivity[]>([]);
+interface IProps extends IDataState{
+  onFetchActivities: () => Promise<void>;
+}
 
-  useEffect(() => {
-    axios
-      .get<IActivity[]>("http://localhost:5000/api/activities")
-      .then((response) => {
-        setActivites(response.data);
-      });
+const App: FC<IProps> = ({activities, onFetchActivities}) => {
+  useEffect(()=>{
+    onFetchActivities();
   }, []);
-
+  
   return (
     <Fragment>
       <NavBar />
@@ -26,4 +26,20 @@ const App = () => {
   );
 };
 
-export default App;
+const mapStateToProps = (state: IDataState) => {
+  return{
+    activities: state.activities
+  }
+};
+
+const mapDispatchToProps = (dispatch: Function) =>
+{
+  return{
+    onFetchActivities: () => dispatch(fetchActiviteis())
+  }
+}
+
+export default connect(
+mapStateToProps, mapDispatchToProps
+)(App);
+

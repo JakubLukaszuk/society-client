@@ -7,3 +7,8 @@ export interface IActivity {
     city: string;
     placeOfEvent: string;
 }
+
+export interface IDataState
+{
+    activities: IActivity[];
+}
