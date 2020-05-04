@@ -12,7 +12,7 @@ export const ActivitiesList: React.FC<IProps> = ({activities}) => {
     <Segment clearing>
       <Item.Group divided>
       {activities.map((activity) => (
-        <Activity activity = {activity}/>
+        <Activity activity = {activity} key={activity.id}/>
       ))}
 
       </Item.Group>

@@ -9,7 +9,7 @@ interface IProps{
 
 export const Activity: React.FC<IProps> = ({activity}) => {
     return (
-        <Item key={activity.id}>
+        <Item>
         <Item.Content>
           <Item.Header as="a">{activity.title}</Item.Header>
           <Item.Meta>{activity.date}</Item.Meta>
