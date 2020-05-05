@@ -1,20 +1,26 @@
 import React from 'react'
 import { Card, Button, Image } from 'semantic-ui-react';
+import { IActivity } from '../../../../modles/activity';
 
-export const ActivityDetails:React.FC = () => {
+interface IProps{
+  activity: IActivity | null;
+  setEditMode: (editMode: boolean) => void;
+}
+
+export const ActivityDetails:React.FC<IProps> = ({activity, setEditMode}) => {
     return (
         <Card fluid>
           <Image src="/assets/placeholder.png" wrapped ui={false} />
           <Card.Content>
-            <Card.Header>Matthew</Card.Header>
+            <Card.Header>{activity?.title}</Card.Header>
             <Card.Meta>
-              <span>Date</span>
+              <span>{activity?.date}</span>
             </Card.Meta>
-            <Card.Description>Description</Card.Description>
+            <Card.Description>{activity?.description}</Card.Description>
           </Card.Content>
           <Card.Content extra>
             <Button.Group widths={2}>
-              <Button basic color="blue" content="Edit" />
+              <Button onClick={()=> setEditMode(true)} basic color="blue" content="Edit" />
               <Button basic color="blue" content="Cancle" />
             </Button.Group>
           </Card.Content>

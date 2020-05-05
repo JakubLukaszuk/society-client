@@ -5,9 +5,11 @@ import { IActivity } from '../../../../modles/activity'
 
 interface IProps{
     activity: IActivity
+    select: (id: string) => void;
+
 }
 
-export const Activity: React.FC<IProps> = ({activity}) => {
+export const Activity: React.FC<IProps> = ({activity, select}) => {
     return (
         <Item>
         <Item.Content>
@@ -18,7 +20,7 @@ export const Activity: React.FC<IProps> = ({activity}) => {
             <div>{activity.city}, {activity.placeOfEvent}</div>
           </Item.Description>
           <Item.Extra>
-            <Button floated="right" content="View" color="blue" />
+            <Button onClick={()=> select(activity.id)} floated="right" content="View" color="blue" />
             <Label basic content={activity.category} />
           </Item.Extra>
         </Item.Content>
