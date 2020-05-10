@@ -1,6 +1,6 @@
 import React, { useEffect, Fragment, FC, useState } from "react";
 import { connect } from "react-redux";
-import { Container, Flag } from "semantic-ui-react";
+import { Container } from "semantic-ui-react";
 
 import { IDataState, IActivity } from "../modles/activity";
 import { NavBar } from "../features/components/NavBar";
@@ -38,6 +38,10 @@ const handleEditActivity = (activity: IActivity) => {
   setEditMode(false);
 }
 
+const handleDeleteActivity = (id: string) => {
+  onSetActivites([...activities.filter(a => a.id !== id)])
+}
+
   useEffect(()=>{
     onFetchActivities();
   }, []);
@@ -53,7 +57,8 @@ const handleEditActivity = (activity: IActivity) => {
         setEditMode={setEditMode}
         setSelectedActivity={setSelectedActivity}
         createActivity = {handleCrateActivity}
-        editActivity = {handleEditActivity}/>
+        editActivity = {handleEditActivity}
+        deleteActivity = {handleDeleteActivity}/>
       </Container>
     </Fragment>
   );
