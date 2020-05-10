@@ -1,10 +1,10 @@
-import axios from "axios";
 import { SET_ACTIVITIES } from "./types/DataActionTypes";
 import { IActivity } from "../modles/activity";
+import agent from "../api/agent";
 
 export const fetchActiviteis = () => {
   return (dispatch : Function) => {
-    return axios.get<IActivity []>("http://localhost:5000/api/activities").then(({ data }) => {
+    return agent.Activities.list().then(data  => {
       dispatch(setActivities(data));
     });
   };
