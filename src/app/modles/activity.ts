@@ -11,4 +11,6 @@ export interface IActivity {
 export interface IDataState
 {
     activities: IActivity[];
+    isLoading: boolean;
+    isSubmitting: boolean;
 }
