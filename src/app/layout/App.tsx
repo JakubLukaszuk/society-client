@@ -1,7 +1,7 @@
 import React, { useEffect, Fragment, FC, useState } from "react";
+import {Route} from 'react-router-dom';
 import { connect } from "react-redux";
 import { Container } from "semantic-ui-react";
-
 import { IDataState, IActivity } from "../modles/activity";
 import { NavBar } from "../features/components/NavBar";
 import { ActivityDashboard } from "../features/components/activities/dashbord/ActivityDashboard";
@@ -13,6 +13,10 @@ import {
   updateActivity,
 } from "../actions/DataActions";
 import { SpinnerLoader } from "../features/components/activities/shared/loader/SpinnerLoader";
+import homePage from "../features/home/homePage";
+import HomePage from "../features/home/homePage";
+import { ActivityForm } from "../features/components/activities/form/ActivityForm";
+import { ActivityDetails } from "../features/components/activities/details/ActivityDetails";
 
 interface IProps extends IDataState {
   onFetchActivities: () => Promise<void>;
@@ -82,18 +86,20 @@ const App: FC<IProps> = ({
     <Fragment>
       <NavBar openCreateForm={handleOpenCreateForm} />
       <Container style={{ marginTop: "7em" }}>
-        <ActivityDashboard
-          activities={activities}
-          selectActivity={handleSelectActivity}
-          selectedActivity={selectedActivity}
-          editMode={editMode}
-          setEditMode={setEditMode}
-          setSelectedActivity={setSelectedActivity}
-          createActivity={handleCrateActivity}
-          editActivity={handleEditActivity}
-          deleteActivity={handleDeleteActivity}
-          isSubmitting={isSubmitting}
-        />
+      <Route exact path='/' component = {HomePage}/>
+      <Route path='/activities' component = {() => <ActivityDashboard
+        activities={activities}
+        selectActivity={handleSelectActivity}
+        selectedActivity={selectedActivity}
+        editMode={editMode}
+        setEditMode={setEditMode}
+        setSelectedActivity={setSelectedActivity}
+        createActivity={handleCrateActivity}
+        editActivity={handleEditActivity}
+        deleteActivity={handleDeleteActivity}
+        isSubmitting={isSubmitting}
+      />}/>
+      <Route path='/createActivity' component = {ActivityForm}/>
       </Container>
     </Fragment>
   );

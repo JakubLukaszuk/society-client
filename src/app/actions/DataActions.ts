@@ -2,7 +2,7 @@ import * as actionTypes from "./types/DataActionTypes";
 import { IActivity } from "../modles/activity";
 import agent from "../api/agent";
 
-export const fetchActiviteis  = () => {
+export const fetchActiviteis = () => {
   return (dispatch : Function) => {
     dispatch(fetchActiviesStart());
     return agent.Activities.list().then(data  => {
