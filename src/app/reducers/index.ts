@@ -1,4 +1,4 @@
-import { SET_ACTIVITIES, DataActionTypes,SUCCES_FETCH_ACTIVITIES, FAIL_FETCH_ACTIVITIES, START_FETCH_ACTIVITIES, START_SUBMITTING, SUCCES_SUBMITTING, FAIL_SUBMITTING } from "../actions/types/DataActionTypes";
+import { SET_ACTIVITIES, DataActionTypes,SUCCES_FETCH_ACTIVITIES, FAIL_FETCH_ACTIVITIES, START_FETCH_ACTIVITIES, START_SUBMITTING, SUCCES_SUBMITTING, FAIL_SUBMITTING, SELECT_ACTIVITY } from "../actions/types/DataActionTypes";
 import { IDataState } from "../modles/activity";
 import { Reducer } from 'redux';
 
@@ -6,7 +6,8 @@ import { Reducer } from 'redux';
 const initialState: IDataState = {
   activities: [],
   isLoading: false,
-  isSubmitting: false
+  isSubmitting: false,
+  selectedActivity: undefined
 }
 
 const reducer: Reducer<IDataState> = (state: IDataState = initialState, action) => {
@@ -15,6 +16,10 @@ const reducer: Reducer<IDataState> = (state: IDataState = initialState, action) 
       return {
         ...state,
         activities: action.payload
+      }
+    case SELECT_ACTIVITY:
+      return {
+        ...state,
       }
     case START_FETCH_ACTIVITIES:
       return {

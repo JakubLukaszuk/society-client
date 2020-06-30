@@ -5,14 +5,12 @@ import { Activity } from "../activity/Activity";
 
 interface IProps {
   activities: IActivity[];
-  selectActivity: (id: string) => void;
   deleteActivity: (id: string) => void;
   isSubmitting: boolean
 }
 
 export const ActivitiesList: React.FC<IProps> = ({
   activities,
-  selectActivity,
   deleteActivity,
   isSubmitting
 }) => {
@@ -24,7 +22,7 @@ export const ActivitiesList: React.FC<IProps> = ({
             isSubmitting = {isSubmitting}
             activity={activity}
             key={activity.id}
-            select={selectActivity}
+            //select={selectActivity}
             remove={deleteActivity}
           />
         ))}

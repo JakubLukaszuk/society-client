@@ -4,11 +4,11 @@ export const SUCCES_FETCH_ACTIVITIES = "SUCCES_FETCH_ACTIVITIES";
 export const FAIL_FETCH_ACTIVITIES = "FAIL_FETCH_ACTIVITIES";
 export const SET_ACTIVITIES = "SET_ACTIVITIES";
 
-
 export const START_SUBMITTING = "START_SUBMITTING";
 export const SUCCES_SUBMITTING = "SUCCES_SUBMITTING";
 export const FAIL_SUBMITTING = "FAIL_SUBMITTING";
 
+export const SELECT_ACTIVITY = "SELECT_ACTIVITY";
 
 interface SetActivitesAction
 {
@@ -46,11 +46,17 @@ interface FailSubmittingAction
   type: typeof FAIL_SUBMITTING
 }
 
+interface SelectActivity
+{
+  type: typeof SELECT_ACTIVITY
+}
+
   export type DataActionTypes = SetActivitesAction |
   StartFetchActivitiesAction |
   FailFetchActivitiesAction |
   SuccesFetchActivitiesAction |
   StartSubmittingAction |
   SuccesSubmittingAction |
-  FailSubmittingAction
+  FailSubmittingAction |
+  SelectActivity
 

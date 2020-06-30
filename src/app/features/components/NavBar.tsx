@@ -2,10 +2,8 @@ import React from "react";
 import { Menu, Container, Button } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
 
-interface IProps{
-  openCreateForm: () => void
-}
-export const NavBar : React.FC<IProps> = ({openCreateForm}) => {
+
+export const NavBar : React.FC = () => {
   return (
     <Menu fixed="top" inverted>
       <Container>

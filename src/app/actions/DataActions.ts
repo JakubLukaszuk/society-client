@@ -1,6 +1,7 @@
 import * as actionTypes from "./types/DataActionTypes";
 import { IActivity } from "../modles/activity";
 import agent from "../api/agent";
+import store from "../store";
 
 export const fetchActiviteis = () => {
   return (dispatch : Function) => {
@@ -77,6 +78,38 @@ export const deleteActivity = (id: string) => {
       dispatch(succesSubmitting())
     })
   }
+}
+
+export const loadActivity =  (id: string) => {
+  return async (dispatch : Function) => {
+    let activity = getActivity(id);
+    if(activity){
+      return(dispatch : Function) => {
+        dispatch(selectActivity(activity));
+      }
+    }
+    else{
+      try{
+        activity = await agent.Activities.details(id);
+          dispatch(selectActivity(activity));
+      }
+      catch (error){
+        console.log(error);
+      }
+    }
+  }
+}
+
+export const selectActivity = (data?: IActivity) =>{
+  return {
+    type: actionTypes.SELECT_ACTIVITY,
+    payload: data
+  }
+}
+
+const getActivity = (id: string) => {
+  return store.getState().activities.filter( activity =>
+    activity.id === id)[0];
 }
 
 export const setActivitiesArr = (data: IActivity []) => {
