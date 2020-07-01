@@ -20,6 +20,7 @@ const reducer: Reducer<IDataState> = (state: IDataState = initialState, action) 
     case SELECT_ACTIVITY:
       return {
         ...state,
+        selectedActivity: action.payload
       }
     case START_FETCH_ACTIVITIES:
       return {

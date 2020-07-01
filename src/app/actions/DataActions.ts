@@ -89,11 +89,14 @@ export const loadActivity =  (id: string) => {
       }
     }
     else{
+      dispatch(fetchActiviesStart());
       try{
         activity = await agent.Activities.details(id);
+          dispatch(fetchActiviesSucces());
           dispatch(selectActivity(activity));
       }
       catch (error){
+        dispatch(fetchActivitiesFailure());
         console.log(error);
       }
     }

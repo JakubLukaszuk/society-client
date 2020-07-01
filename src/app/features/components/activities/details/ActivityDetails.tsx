@@ -4,6 +4,7 @@ import { IActivity, IDataState } from "../../../../modles/activity";
 import { RouteComponentProps } from "react-router-dom";
 import { connect } from "react-redux";
 import { selectActivity, loadActivity } from "../../../../actions/DataActions";
+import { SpinnerLoader } from "../shared/loader/SpinnerLoader";
 
 interface DetailParams {
   id: string;
@@ -21,13 +22,20 @@ const ActivityDetails: React.FC<IProps> = ({
   onSelectActivity,
   onLoadActivity,
   match,
+  history,
   isLoading,
 }) => {
 
 
   useEffect(() => {
     onLoadActivity(match.params.id);
+    
   }, [onLoadActivity]);
+
+  if(isLoading)
+  {
+    return <SpinnerLoader/>
+  }
 
   return (
     <Card fluid>
@@ -48,7 +56,7 @@ const ActivityDetails: React.FC<IProps> = ({
             content="Edit"
           />
           <Button
-            onClick={() => onSelectActivity(selectedActivity)}
+            onClick={() => history.push('/activities')}
             basic
             color="blue"
             content="Cancel"
