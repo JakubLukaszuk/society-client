@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Grid, GridColumn } from "semantic-ui-react";
 import { IActivity, IDataState } from "../../../../modles/activity";
 import { ActivitiesList } from "../list/ActivitiesList";
-import { ActivityForm } from "../form/ActivityForm";
 import { connect } from "react-redux";
-import { fetchActiviteis, setActivitiesArr, updateActivity, createActivity, deleteActivity, loadActivity, selectActivity } from "../../../../actions/DataActions";
+import { fetchActiviteis, setActivitiesArr, deleteActivity } from "../../../../actions/DataActions";
 import { SpinnerLoader } from "../shared/loader/SpinnerLoader";
 
 interface IProps extends IDataState {
@@ -20,21 +19,15 @@ interface IProps extends IDataState {
 const ActivityDashboard: React.FC<IProps>  = ({
   activities,
   isSubmitting,
-  selectedActivity,
   isLoading,
   onFetchActivities,
   onSetActivites,
-  onUpdateActivity,
-  onCrateActivity,
   onDelteteActivity,
-  onLoadActivity,
-  onSelectActivity
-
 }) => {
 
   useEffect(() => {
     onFetchActivities();
-  }, []);
+  }, [onFetchActivities]);
 
   const handleDeleteActivity = (id: string) => {
     onDelteteActivity(id);
@@ -45,7 +38,7 @@ const ActivityDashboard: React.FC<IProps>  = ({
   if (isLoading) {
     return <SpinnerLoader content="activities are loading..." />;
   }
-  
+
   return (
     <Grid>
       <Grid.Column width={10}>
@@ -66,7 +59,6 @@ const mapStateToProps = (state: IDataState) => {
     activities: state.activities,
     isLoading: state.isLoading,
     isSubmitting: state.isSubmitting,
-    selectedActivity: state.selectedActivity,
   };
 };
 
@@ -75,13 +67,7 @@ const mapDispatchToProps = (dispatch: Function) => {
     onFetchActivities: () => dispatch(fetchActiviteis()),
     onSetActivites: (activities: IActivity[]) =>
       dispatch(setActivitiesArr(activities)),
-    onUpdateActivity: (activity: IActivity) =>
-      dispatch(updateActivity(activity)),
-    onCrateActivity: (activity: IActivity) =>
-      dispatch(createActivity(activity)),
     onDelteteActivity: (id: string) => dispatch(deleteActivity(id)),
-    onLoadActivity: (id: string) => dispatch(loadActivity(id)),
-    onSelectActivity: (avtivity?: IActivity) => dispatch(selectActivity(avtivity))
   };
 };
 

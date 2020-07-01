@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Card, Button, Image } from "semantic-ui-react";
 import { IActivity, IDataState } from "../../../../modles/activity";
 import { RouteComponentProps, Link } from "react-router-dom";
@@ -27,11 +27,7 @@ const ActivityDetails: React.FC<IProps> = ({
 
 
   useEffect(() => {
-    console.log("XD");
-
     onLoadActivity(match.params.id);
-    console.log(selectedActivity);
-    
   }, [onLoadActivity, match.params.id]);
 
   if(isLoading)

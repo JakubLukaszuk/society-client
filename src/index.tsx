@@ -6,11 +6,14 @@ import "./app/layout/index.css";
 import App from "./app/layout/App";
 import * as serviceWorker from "./serviceWorker";
 import store from "./app/store";
+import ScrollToTop from "./app/layout/ScrollToTop";
 
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <ScrollToTop>
+        <App />
+      </ScrollToTop>
     </BrowserRouter>
   </Provider>,
   document.getElementById("root")
