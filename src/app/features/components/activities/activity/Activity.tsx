@@ -14,7 +14,6 @@ export const Activity: React.FC<IProps> = ({
   remove,
   isSubmitting,
 }) => {
-  console.log(isSubmitting);
   return (
     <Item>
       <Item.Content>

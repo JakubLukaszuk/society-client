@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Card, Button, Image } from "semantic-ui-react";
 import { IActivity, IDataState } from "../../../../modles/activity";
-import { RouteComponentProps } from "react-router-dom";
+import { RouteComponentProps, Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { selectActivity, loadActivity } from "../../../../actions/DataActions";
+import { loadActivity } from "../../../../actions/DataActions";
 import { SpinnerLoader } from "../shared/loader/SpinnerLoader";
 
 interface DetailParams {
@@ -11,15 +11,14 @@ interface DetailParams {
 }
 
 interface IProps extends RouteComponentProps<DetailParams> {
-  selectedActivity: IActivity | undefined;
-  onSelectActivity: (avtivity: IActivity | undefined) => void;
+  selectedActivity?: IActivity;
+  onSelectActivity: (avtivity: IActivity ) => void;
   onLoadActivity: (id: string) => void;
   isLoading: boolean;
 }
 
 const ActivityDetails: React.FC<IProps> = ({
   selectedActivity,
-  onSelectActivity,
   onLoadActivity,
   match,
   history,
@@ -28,9 +27,12 @@ const ActivityDetails: React.FC<IProps> = ({
 
 
   useEffect(() => {
+    console.log("XD");
+
     onLoadActivity(match.params.id);
+    console.log(selectedActivity);
     
-  }, [onLoadActivity]);
+  }, [onLoadActivity, match.params.id]);
 
   if(isLoading)
   {
@@ -50,7 +52,7 @@ const ActivityDetails: React.FC<IProps> = ({
       <Card.Content extra>
         <Button.Group width={2}>
           <Button
-            onClick={() => {}}
+            as={Link} to={`/manage/${selectedActivity?.id}`}
             basic
             color="blue"
             content="Edit"
@@ -69,7 +71,6 @@ const ActivityDetails: React.FC<IProps> = ({
 
 const mapDispatchToProps = (dispatch: Function) => {
   return {
-    onSelectActivity: (avtivity: IActivity | undefined) => dispatch(selectActivity(avtivity)),
     onLoadActivity: (id: string) => dispatch(loadActivity(id))
   };
 };
