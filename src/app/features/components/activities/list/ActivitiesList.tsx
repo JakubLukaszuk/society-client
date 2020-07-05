@@ -15,7 +15,6 @@ export const ActivitiesList: React.FC<IProps> = ({
   isSubmitting
 }) => {
   return (
-    <Segment clearing>
       <Item.Group divided>
         {activities.map((activity) => (
           <Activity
@@ -27,6 +26,5 @@ export const ActivitiesList: React.FC<IProps> = ({
           />
         ))}
       </Item.Group>
-    </Segment>
   );
 };
