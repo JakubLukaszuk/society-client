@@ -19,6 +19,7 @@ interface IProps extends RouteComponentProps<DetailParams> {
   onSelectActivity: (avtivity: IActivity) => void;
   onLoadActivity: (id: string) => void;
   isLoading: boolean;
+  error: any;
 }
 
 const ActivityDetails: React.FC<IProps> = ({
@@ -27,10 +28,17 @@ const ActivityDetails: React.FC<IProps> = ({
   match,
   history,
   isLoading,
+  error,
 }) => {
   useEffect(() => {
     onLoadActivity(match.params.id);
   }, [onLoadActivity, match.params.id]);
+
+  useEffect(() => {
+    if(error){
+      history.push('/notfound')
+    }
+  }, [error])
 
   if (isLoading) {
     return <SpinnerLoader />;
@@ -86,6 +94,7 @@ const mapStateToProps = (state: IDataState) => {
   return {
     isLoading: state.isLoading,
     selectedActivity: state.selectedActivity,
+    error: state.error
   };
 };
 

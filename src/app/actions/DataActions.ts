@@ -11,7 +11,7 @@ export const fetchActiviteis = () => {
       dispatch(setActivities(data));
     })
     .catch (error => {
-      console.log(error);
+      dispatch(fetchActivitiesFailure(error))
     });
   };
 }
@@ -28,10 +28,11 @@ export const fetchActiviesSucces = () => {
   }
 }
 
-export const fetchActivitiesFailure = () =>
+export const fetchActivitiesFailure = (error: object) =>
 {
   return {
-    type: actionTypes.FAIL_FETCH_ACTIVITIES
+    type: actionTypes.FAIL_FETCH_ACTIVITIES,
+    payload: error
   }
 }
 
@@ -54,7 +55,7 @@ export const createActivity = (activity: IActivity) => {
     {
        dispatch(succesSubmitting())
     })
-    .catch(errror=> {});
+    .catch(error=> dispatch(failSubmitting(error)));
   }
 }
 
@@ -66,8 +67,8 @@ export const updateActivity = (activity: IActivity) => {
         dispatch(succesSubmitting())
         dispatch(fetchActiviteis())
       })
-      .catch(errror=> {});
-  };
+      .catch(error=> dispatch(failSubmitting(error)));
+    };
 }
 
 export const deleteActivity = (id: string) => {
@@ -96,8 +97,7 @@ export const loadActivity =  (id: string) => {
           dispatch(selectActivity(activity));
       }
       catch (error){
-        dispatch(fetchActivitiesFailure());
-        console.log(error);
+        dispatch(fetchActivitiesFailure(error));
       }
     }
   }
@@ -134,8 +134,9 @@ export const succesSubmitting = () => {
   }
 }
 
-export const failSubmitting = () => {
+export const failSubmitting = (error: object) => {
   return {
-    type: actionTypes.FAIL_SUBMITTING
+    type: actionTypes.FAIL_SUBMITTING,
+    payload: error
   }
 }

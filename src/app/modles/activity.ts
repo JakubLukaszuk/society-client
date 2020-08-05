@@ -14,4 +14,5 @@ export interface IDataState
     isLoading: boolean;
     isSubmitting: boolean;
     selectedActivity?: IActivity;
+    error?: object | null;
 }

@@ -1,20 +1,23 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Router } from "react-router-dom";
 import { Provider } from "react-redux";
+import {createBrowserHistory} from 'history'
 import "./app/layout/index.css";
 import App from "./app/layout/App";
 import * as serviceWorker from "./serviceWorker";
 import store from "./app/store";
 import ScrollToTop from "./app/layout/ScrollToTop";
 
+export const history = createBrowserHistory();
+
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
+    <Router history = {history}>
       <ScrollToTop>
         <App />
       </ScrollToTop>
-    </BrowserRouter>
+    </Router>
   </Provider>,
   document.getElementById("root")
 );

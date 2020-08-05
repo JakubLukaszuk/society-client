@@ -7,7 +7,8 @@ const initialState: IDataState = {
   activities: [],
   isLoading: false,
   isSubmitting: false,
-  selectedActivity: undefined
+  selectedActivity: undefined,
+  error: null
 }
 
 const reducer: Reducer<IDataState> = (state: IDataState = initialState, action) => {
@@ -35,7 +36,9 @@ const reducer: Reducer<IDataState> = (state: IDataState = initialState, action) 
     case FAIL_FETCH_ACTIVITIES:
       return {
         ...state,
-        isLoading: false
+        isLoading: false,
+        error: action.payload
+
       }
     case START_SUBMITTING:
       return {
@@ -50,7 +53,8 @@ const reducer: Reducer<IDataState> = (state: IDataState = initialState, action) 
     case FAIL_SUBMITTING:
       return {
         ...state,
-        isSubmitting: false
+        isSubmitting: false,
+        error: action.payload
       }
     default:
       return state;
