@@ -19,7 +19,7 @@ import {ToastContainer} from 'react-toastify';
 const App: FC<RouteChildrenProps> = ({ location }) => {
   return (
     <Fragment>
-    <ToastContainer position='bottom-right'>
+    <ToastContainer position='bottom-right'/>
       <Route exact path="/" component={HomePage} />
       <Route
         path={"/(.+)"}
@@ -41,7 +41,6 @@ const App: FC<RouteChildrenProps> = ({ location }) => {
           </Fragment>
         )}
       />
-    </ToastContainer>
     </Fragment>
   );
 };
