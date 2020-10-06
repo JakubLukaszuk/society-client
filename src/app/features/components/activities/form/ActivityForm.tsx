@@ -11,6 +11,11 @@ import {
 import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router-dom";
 import { SpinnerLoader } from "../shared/loader/SpinnerLoader";
+import {Form as FinalForm, Field}from "react-final-form";
+import { TextInput } from "../../../../common/form/TextInput";
+import { TextAreaInput } from "../../../../common/form/TextAreaInput";
+import SelectInput from "../../../../common/form/SelectInputs";
+import { category } from "../../../../common/selectOptions/categoryOptions";
 
 interface DetailParams {
   id: string;
@@ -58,74 +63,81 @@ export const ActivityForm: React.FC<IProps> = ({
     };
   }, [onSelectActivity, initFormState, activity.id.length]);
 
-  const handleSubmit = () => {
-    if (activity.id) {
-      onUpdateActivity(activity).then(() =>
-        history.push(`/activities/${activity.id}`)
-      );
-    } else {
-      let newActivity = {
-        ...activity,
-        id: uuid(),
-      };
-      onCrateActivity(newActivity).then(() =>
-        history.push(`/activities/${newActivity.id}`)
-      );
-    }
-  };
-
-  const handleInutChange = (
-    event: FormEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = event.currentTarget;
-    setActivity({ ...activity, [name]: value });
-  };
+  // const handleSubmit = () => {
+  //   if (activity.id) {
+  //     onUpdateActivity(activity).then(() =>
+  //       history.push(`/activities/${activity.id}`)
+  //     );
+  //   } else {
+  //     let newActivity = {
+  //       ...activity,
+  //       id: uuid(),
+  //     };
+  //     onCrateActivity(newActivity).then(() =>
+  //       history.push(`/activities/${newActivity.id}`)
+  //     );
+  //   }
+  // };
 
   if (isLoading) {
     return <SpinnerLoader />;
+  }
+
+  const finalHandleSubmit = (values: any)=>{
+    console.log(values);
   }
 
   return (
     <Grid>
       <GridColumn width={10}>
         <Segment clearing>
-          <Form onSubmit={handleSubmit}>
-            <Form.Input
-              onChange={handleInutChange}
+        <FinalForm
+          onSubmit={finalHandleSubmit}
+          render={({handleSubmit})=>(
+            <Form onSubmit={handleSubmit}>
+            <Field
+              // onChange={handleInutChange}
               name="title"
               placeholder="Title"
               value={activity.title}
+              component={TextInput}
             />
-            <Form.TextArea
-              onChange={handleInutChange}
+            <Field
+              // onChange={handleInutChange}
               name="description"
-              rows={2}
+              rows={3}
               placeholder="Description"
               value={activity.description}
+              component={TextAreaInput}
+
             />
-            <Form.Input
+            <Field
+              component={SelectInput}
               placeholder="Category"
               value={activity.category}
-              onChange={handleInutChange}
+              options = {category}
+              // onChange={handleInutChange}
               name="category"
             />
-            <Form.Input
-              type="datetime-local"
+            <Field
+              component={TextInput}
               placeholder="Date"
               value={activity.date}
-              onChange={handleInutChange}
+              // onChange={handleInutChange}
               name="date"
             />
-            <Form.Input
+            <Field
+              component={TextInput}
               placeholder="City"
               value={activity.city}
-              onChange={handleInutChange}
+              // onChange={handleInutChange}
               name="city"
             />
-            <Form.Input
+            <Field
+              component={TextInput}
               placeholder="Place of event"
               value={activity.placeOfEvent}
-              onChange={handleInutChange}
+              // onChange={handleInutChange}
               name="placeOfEvent"
             />
             <Button
@@ -137,6 +149,9 @@ export const ActivityForm: React.FC<IProps> = ({
             />
             <Button onClick={() => {}} floated="right" content="Cancel" />
           </Form>
+          )
+          }
+        />
         </Segment>
       </GridColumn>
     </Grid>

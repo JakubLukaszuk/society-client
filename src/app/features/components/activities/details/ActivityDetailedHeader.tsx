@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Segment, Image, Item, Header, Button } from "semantic-ui-react";
 import { IActivity } from "../../../../modles/activity";
 
@@ -33,8 +34,8 @@ const ActivityDetailedHeader: React.FC<{activity?: IActivity}> = ({activity}) =>
       </Segment>
       <Segment clearing attached="bottom">
         <Button color="teal"> Join Activity</Button>
-        <Button>Cancle</Button>
-        <Button color="orange" floated="right">
+        <Button>Cancel</Button>
+        <Button as={Link} to={`/manage/${activity?.id}`} color="orange" floated="right">
           Menage Event
         </Button>
       </Segment>
