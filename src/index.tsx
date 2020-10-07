@@ -4,10 +4,14 @@ import { BrowserRouter, Router } from "react-router-dom";
 import { Provider } from "react-redux";
 import {createBrowserHistory} from 'history'
 import "./app/layout/index.css";
+import 'react-widgets/dist/css/react-widgets.css'
 import App from "./app/layout/App";
 import * as serviceWorker from "./serviceWorker";
 import store from "./app/store";
 import ScrollToTop from "./app/layout/ScrollToTop";
+import dateFnsLocalizer from 'react-widgets-date-fns';
+
+new dateFnsLocalizer();
 
 export const history = createBrowserHistory();
 

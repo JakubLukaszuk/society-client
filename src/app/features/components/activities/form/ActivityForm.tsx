@@ -15,6 +15,7 @@ import {Form as FinalForm, Field}from "react-final-form";
 import { TextInput } from "../../../../common/form/TextInput";
 import { TextAreaInput } from "../../../../common/form/TextAreaInput";
 import SelectInput from "../../../../common/form/SelectInputs";
+import {DataInput} from "../../../../common/form/DateInput";
 import { category } from "../../../../common/selectOptions/categoryOptions";
 
 interface DetailParams {
@@ -47,7 +48,7 @@ export const ActivityForm: React.FC<IProps> = ({
     title: "",
     category: "",
     description: "",
-    date: "",
+    date: null,
     city: "",
     placeOfEvent: "",
   });
@@ -120,9 +121,9 @@ export const ActivityForm: React.FC<IProps> = ({
               name="category"
             />
             <Field
-              component={TextInput}
+              component={DataInput}
               placeholder="Date"
-              value={activity.date}
+              value={activity.date!}
               // onChange={handleInutChange}
               name="date"
             />

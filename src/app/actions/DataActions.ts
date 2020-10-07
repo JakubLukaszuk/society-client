@@ -39,7 +39,7 @@ export const fetchActivitiesFailure = (error: object) =>
 const setActivities= ( data : IActivity[]) => {
   let activities: Array<IActivity> = [];
   data.forEach(activity => {
-    activity.date = activity.date.split('.')[0];
+    // activity.date = activity.date.split('.')[0];
     activities.push(activity);
   })
   return {
